@@ -10,6 +10,7 @@ var govTrack    = require('govtrack-node');
 //
 // If the speeches/index.json file doesn't exist, run:
 //   npm run bootstrap
+console.log("Matching govtrack IDs with speech results");
 govTrack.findRole({role_type: "president", sort: "enddate"},
     function(err, res) {
         if (err) {

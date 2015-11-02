@@ -21,6 +21,6 @@
         "request": "^2.65.0"
     },
     "scripts": {
-        "bootstrap": "node stateOfTheUnion.js"
+        "bootstrap": "node stateOfTheUnion.js && node matchPresidents.js"
     }
 }

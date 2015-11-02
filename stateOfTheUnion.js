@@ -136,6 +136,7 @@ function parseSpeech(year, url, name) {
 }
 
 // Main entry point
+console.log("Retrieving speech text from http://www.presidency.ucsb.edu/sou.php");
 request('http://www.presidency.ucsb.edu/sou.php',
     function (err, response, data) {
         if (err) {
