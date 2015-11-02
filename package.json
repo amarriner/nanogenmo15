@@ -12,5 +12,10 @@
   "bugs": {
     "url": "https://github.com/amarriner/nanogenmo15/issues"
   },
-  "homepage": "https://github.com/amarriner/nanogenmo15"
+  "homepage": "https://github.com/amarriner/nanogenmo15",
+  "devDependencies": {
+    "govtrack-node": "^0.2.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.3"
+  }
 }
