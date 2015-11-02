@@ -1,0 +1,19 @@
+{
+  "name": "NaNoGenMo15",
+  "version": "0.1.0",
+  "description": "NaNoGenMo 2015",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amarriner/nanogenmo15"
+  },
+  "author": "Aaron Marriner (amarriner@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amarriner/nanogenmo15/issues"
+  },
+  "homepage": "https://github.com/amarriner/nanogenmo15"
+}
