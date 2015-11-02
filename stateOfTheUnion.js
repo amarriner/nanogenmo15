@@ -75,7 +75,6 @@ function parseLinks(data) {
                         if (lastPres) {
                             var ndx = allPresidents.map(function(e) { return e.name; }).indexOf(lastPres);
                             if (ndx >= 0) {
-                                console.log('found');
                                 allPresidents[ndx].speeches.concat(pres.speeches);
                             }
                             else {
