@@ -4,11 +4,14 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         jshint: {
-            all: [
-                'index.js'
-            ]
+            options: {
+                'devel': true
+            },
+            files: {
+                src: ['Gruntfile.js', 'index.js', 'stateOfTheUnion.js']
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
-}
+};
