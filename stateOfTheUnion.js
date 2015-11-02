@@ -73,7 +73,14 @@ function parseLinks(data) {
                     // cell then it's a president's name
                     if (! /^</.test($(td).html())) {
                         if (lastPres) {
-                            allPresidents.push(pres);
+                            var ndx = allPresidents.map(function(e) { return e.name; }).indexOf(lastPres);
+                            if (ndx >= 0) {
+                                console.log('found');
+                                allPresidents[ndx].speeches.concat(pres.speeches);
+                            }
+                            else {
+                                allPresidents.push(pres);
+                            }
                         }
 
                         lastPres = $(td).text();
@@ -113,7 +120,6 @@ function parseSpeech(year, url, name) {
     var filename = "speeches/" + name + "/" + year + ".txt";
 
     if (exists(filename)) {
-        console.log(filename + " already exists, skipping...");
         return;
     }
 
