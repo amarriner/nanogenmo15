@@ -8,7 +8,7 @@ module.exports = function(grunt) {
                 'devel': true
             },
             files: {
-                src: ['Gruntfile.js', 'index.js', 'stateOfTheUnion.js']
+                src: ['Gruntfile.js', 'index.js', 'matchPresidents.js', 'stateOfTheUnion.js']
             }
         }
     });
