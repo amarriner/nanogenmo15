@@ -10,5 +10,5 @@ Currently the only thing to do to build is cloning the repository, installing th
 ```shell
 git clone https://github.com/amarriner/nanogenmo15.git
 npm install
-npm run bootstrap
+grunt bootstrap
 ```
