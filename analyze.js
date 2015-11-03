@@ -60,6 +60,25 @@ for (var i = 0; i < json.length; i++) {
     }
 }
 
+// Run through the words object and push each property into an array. Would've
+// like to have done this in the words loop above, but trying to find the
+// property in an array was very expensive and made the script just run for
+// far too long so we're doing it now.
+var wordArray = [];
+for (var k in Object.keys(words)) {
+    var key = Object.keys(words)[k];
+    wordArray.push({ "word": key, "count": words[key]});
+}
+
+// Then sorting the array by the count of words in descending order
+wordArray.sort(function (a, b) {
+    a = a.count;
+    b = b.count;
+
+    return a > b ? -1 : ( a < b ? 1 : 0);
+});
+
+// And finally writing the results to a JSON file
 var f = fs.openSync("words.json", 'w');
-fs.writeSync(f, JSON.stringify(words, null, 3), undefined, "utf-8");
+fs.writeSync(f, JSON.stringify(wordArray, null, 3), undefined, "utf-8");
 fs.closeSync(f);
