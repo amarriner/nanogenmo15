@@ -30,11 +30,22 @@ module.exports = function(grunt) {
                     'libs/*'
                 ]
             }
+        },
+
+        jsonlint: {
+            all: {
+                src: [
+                    'package.json',
+                    'speeches/index.json',
+                    'words.json'
+                ]
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-execute');
+    grunt.loadNpmTasks('grunt-jsonlint');
 
     grunt.registerTask('analyze', ['jshint', 'execute:analyze']);
     grunt.registerTask('bootstrap', ['execute:bootstrap']);
