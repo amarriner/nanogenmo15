@@ -25,7 +25,7 @@ govTrack.findRole({role_type: "president", sort: "enddate"},
             return;
         }
 
-        var json = JSON.parse(fs.readFileSync("speeches/index.json"));
+        var json = JSON.parse(fs.readFileSync("speeches/index.json"), "utf-8");
 
         // Loop through govtrack results
         for (var i in res.objects) {
@@ -94,7 +94,7 @@ govTrack.findRole({role_type: "president", sort: "enddate"},
 
         // Overrite the JSON file with the updated version.
         var f = fs.openSync("speeches/index.json", 'w');
-        fs.writeSync(f, JSON.stringify(json, null, 3));
+        fs.writeSync(f, JSON.stringify(json, null, 3), undefined, "utf-8");
         fs.closeSync(f);
     }
 );

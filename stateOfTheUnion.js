@@ -19,6 +19,8 @@ function President(name) {
     this.speeches = [];
 }
 
+tools.mkdir("speeches/");
+
 // This finds the table rows that actually have the state of the union
 // links in them. Unfortunately there aren't any IDs or classes that
 // make this easier so if the structure of that page ever changes,
@@ -76,9 +78,8 @@ function parseLinks(data) {
 
     allPresidents.push(pres);
 
-    tools.mkdir("speeches");
     f = fs.openSync("speeches/index.json", 'w');
-    fs.writeSync(f, JSON.stringify(allPresidents));
+    fs.writeSync(f, JSON.stringify(allPresidents), undefined, "utf-8");
     fs.closeSync(f);
 }
 
@@ -97,7 +98,7 @@ function parseSpeech(year, url, name) {
             var $ = cheerio.load(data);
             var f = fs.openSync(filename, 'w');
 
-            fs.writeSync(f, $('span.displaytext').text());
+            fs.writeSync(f, $('span.displaytext').text(), undefined, "utf-8");
             fs.closeSync(f);
         }
     );
