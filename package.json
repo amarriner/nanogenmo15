@@ -20,6 +20,7 @@
     "grunt-contrib-jshint": "^0.11.3",
     "grunt-execute": "^0.2.2",
     "grunt-jsonlint": "^1.0.6",
+    "markovchain": "0.0.7",
     "request": "^2.65.0",
     "utf8": "^2.1.1"
   }

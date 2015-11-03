@@ -13,6 +13,10 @@ module.exports = function(grunt) {
                     'stateOfTheUnion.js',
                     'matchPresidents.js'
                 ]
+            },
+
+            markov: {
+                src: ['markov.js']
             }
         },
 
@@ -22,11 +26,7 @@ module.exports = function(grunt) {
             },
             files: {
                 src: [
-                    'Gruntfile.js',
-                    'index.js',
-                    'matchPresidents.js',
-                    'stateOfTheUnion.js',
-                    'analyze.js',
+                    '*.js',
                     'libs/*'
                 ]
             }
@@ -49,4 +49,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('analyze', ['jshint', 'execute:analyze']);
     grunt.registerTask('bootstrap', ['execute:bootstrap']);
+    grunt.registerTask('markov', ['jshint', 'execute:markov']);
 };
