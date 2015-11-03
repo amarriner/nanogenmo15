@@ -2,6 +2,8 @@
    'use strict';
 }());
 
+var fs = require('fs');
+
 module.exports = {
     // Wrapper to fs.stat to check if a file exists
     exists: function exists(path) {
@@ -24,7 +26,6 @@ module.exports = {
     mkdir: function mkdir(path) {
         for (var i = 0; i < path.split('/').length; i++) {
             var dir = path.split('/').slice(0, i + 1).join('/');
-
             try {
                 var stats = fs.statSync(dir);
             }
