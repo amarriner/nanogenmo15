@@ -10,6 +10,7 @@
 var fs      = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
+var utf8    = require('utf8');
 var tools   = require('./libs/tools');
 
 var allPresidents = [];
@@ -79,7 +80,7 @@ function parseLinks(data) {
     allPresidents.push(pres);
 
     f = fs.openSync("speeches/index.json", 'w');
-    fs.writeSync(f, JSON.stringify(allPresidents), undefined, "utf-8");
+    fs.writeSync(f, utf8.encode(JSON.stringify(allPresidents)), undefined, "utf8");
     fs.closeSync(f);
 }
 
@@ -98,7 +99,7 @@ function parseSpeech(year, url, name) {
             var $ = cheerio.load(data);
             var f = fs.openSync(filename, 'w');
 
-            fs.writeSync(f, $('span.displaytext').text(), undefined, "utf-8");
+            fs.writeSync(f, utf8.encode($('span.displaytext').text()), undefined, "utf8");
             fs.closeSync(f);
         }
     );
