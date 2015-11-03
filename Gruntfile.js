@@ -3,6 +3,15 @@ module.exports = function(grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
 
+        execute: {
+            bootstrap: {
+                src: [
+                    'stateOfTheUnion.js',
+                    'matchPresidents.js'
+                ]
+            }
+        },
+
         jshint: {
             options: {
                 'devel': true
@@ -14,4 +23,7 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-execute');
+
+    grunt.registerTask('bootstrap', 'execute:bootstrap');
 };
