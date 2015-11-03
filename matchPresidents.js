@@ -4,6 +4,7 @@
 
 var fs          = require('fs');
 var govTrack    = require('govtrack-node');
+var tools       = require('./libs/tools');
 
 // Get all "President" roles from govtrack and loop through them trying to get
 // the govtrack ID for the presidents in the speeches/index.json file.
@@ -15,9 +16,15 @@ govTrack.findRole({role_type: "president", sort: "enddate"},
     function(err, res) {
         if (err) {
             console.log(err);
+            return;
         }
 
         // Read the JSON file from disk and parse to a JS object
+        if (! tools.exists("speeches/index.json")) {
+            console.log("Missing JSON file! Run grunt bootstrap to generate...");
+            return;
+        }
+
         var json = JSON.parse(fs.readFileSync("speeches/index.json"));
 
         // Loop through govtrack results
