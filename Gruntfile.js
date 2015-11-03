@@ -4,6 +4,10 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         execute: {
+            analyze: {
+                src: ['analyze.js']
+            },
+
             bootstrap: {
                 src: [
                     'stateOfTheUnion.js',
@@ -17,7 +21,14 @@ module.exports = function(grunt) {
                 'devel': true
             },
             files: {
-                src: ['Gruntfile.js', 'index.js', 'matchPresidents.js', 'stateOfTheUnion.js']
+                src: [
+                    'Gruntfile.js',
+                    'index.js',
+                    'matchPresidents.js',
+                    'stateOfTheUnion.js',
+                    'analyze.js',
+                    'libs/*'
+                ]
             }
         }
     });
@@ -25,5 +36,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-execute');
 
-    grunt.registerTask('bootstrap', 'execute:bootstrap');
+    grunt.registerTask('analyze', ['jshint', 'execute:analyze']);
+    grunt.registerTask('bootstrap', ['execute:bootstrap']);
 };

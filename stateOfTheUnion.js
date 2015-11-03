@@ -10,45 +10,13 @@
 var fs      = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
+var tools   = require('./libs/tools');
 
 var allPresidents = [];
 
 function President(name) {
     this.name = name;
     this.speeches = [];
-}
-
-// Wrapper to fs.stat to check if a file exists
-function exists(path) {
-    var ret = true;
-
-    try {
-        var stats = fs.statSync(path);
-    }
-    catch (e) {
-        if (e.errno == 34) {
-            ret = false;
-        }
-    }
-
-    return ret;
-}
-
-// Makes a directory or directories depending on the path. Splits the path
-// parameter into individual directories and adds each in order.
-function mkdir(path) {
-    for (var i = 0; i < path.split('/').length; i++) {
-        var dir = path.split('/').slice(0, i + 1).join('/');
-
-        try {
-            var stats = fs.statSync(dir);
-        }
-        catch (e) {
-            if (e.errno == 34) {
-                fs.mkdirSync(dir);
-            }
-        }
-    }
 }
 
 // This finds the table rows that actually have the state of the union
@@ -108,7 +76,7 @@ function parseLinks(data) {
 
     allPresidents.push(pres);
 
-    mkdir("speeches");
+    tools.mkdir("speeches");
     f = fs.openSync("speeches/index.json", 'w');
     fs.writeSync(f, JSON.stringify(allPresidents));
     fs.closeSync(f);
@@ -118,11 +86,11 @@ function parseLinks(data) {
 function parseSpeech(year, url, name) {
     var filename = "speeches/" + name + "/" + year + ".txt";
 
-    if (exists(filename)) {
+    if (tools.exists(filename)) {
         return;
     }
 
-    mkdir("speeches/" + name);
+    tools.mkdir("speeches/" + name);
 
     request(url,
         function(err, response, data) {
