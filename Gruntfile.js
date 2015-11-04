@@ -3,6 +3,8 @@ module.exports = function(grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
 
+        clean: ["words.json", "speeches"],
+
         execute: {
             analyze: {
                 src: ['analyze.js']
@@ -17,6 +19,15 @@ module.exports = function(grunt) {
 
             markov: {
                 src: ['markov.js']
+            }
+        },
+
+        if: {
+            clean: {
+                options: {
+                    test: function() { return clean; }
+                },
+                ifTrue: [ 'clean' ]
             }
         },
 
@@ -43,11 +54,15 @@ module.exports = function(grunt) {
         }
     });
 
+    var clean = grunt.option('clean') || false;
+
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-execute');
+    grunt.loadNpmTasks('grunt-if');
     grunt.loadNpmTasks('grunt-jsonlint');
 
     grunt.registerTask('analyze', ['jshint', 'execute:analyze']);
-    grunt.registerTask('bootstrap', ['execute:bootstrap']);
+    grunt.registerTask('bootstrap', ['if:clean', 'execute:bootstrap']);
     grunt.registerTask('markov', ['jshint', 'execute:markov']);
 };
