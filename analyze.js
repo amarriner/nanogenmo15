@@ -12,8 +12,9 @@ if (! tools.exists('speeches/index.json')) {
     return;
 }
 
-var json    = JSON.parse(fs.readFileSync('speeches/index.json'));
-var words   = {};
+var json                = JSON.parse(fs.readFileSync('speeches/index.json'));
+var words               = {};
+var totalSpeechWords    = 0;
 
 // Loop through each president in the JSON file
 for (var i = 0; i < json.length; i++) {
@@ -42,13 +43,13 @@ for (var i = 0; i < json.length; i++) {
         ;
 
         // Loop through the words in the speech, counting occurrances
-        console.log('Processing ' + filename + ' (' + speech.length + ')...');
+        totalSpeechWords += speech.length;
         for (var k = 0; k < speech.length; k++) {
-            var word = speech[k];
+            var word = speech[k].trim();
 
             // Ignore words that are all numbers
             if (/^[0-9]*$/.test(word)) {
-                break;
+                continue;
             }
 
             if (! words[word]) {
@@ -64,10 +65,17 @@ for (var i = 0; i < json.length; i++) {
 // like to have done this in the words loop above, but trying to find the
 // property in an array was very expensive and made the script just run for
 // far too long so we're doing it now.
+var totalWords = 0;
+var uniqueWords = 0;
 var wordArray = [];
 for (var k in Object.keys(words)) {
     var key = Object.keys(words)[k];
-    wordArray.push({ "word": key, "count": words[key]});
+
+    if (!isNaN(words[key])) {
+        wordArray.push({ "word": key, "count": words[key]});
+        totalWords += parseInt(words[key]);
+        uniqueWords++;
+    }
 }
 
 // Then sorting the array by the count of words in descending order
@@ -82,3 +90,11 @@ wordArray.sort(function (a, b) {
 var f = fs.openSync("words.json", 'w');
 fs.writeSync(f, JSON.stringify(wordArray, null, 3), undefined, "utf-8");
 fs.closeSync(f);
+
+console.log('----------------------------------------------------------------');
+console.log('                      C O M P L E T E');
+console.log('----------------------------------------------------------------');
+console.log('Words found in Speeches    : ' + totalSpeechWords);
+console.log('Words in JSON file         : ' + totalWords);
+console.log('Unique words               : ' + uniqueWords);
+console.log('----------------------------------------------------------------');
