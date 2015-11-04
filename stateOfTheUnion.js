@@ -68,8 +68,10 @@ function parseLinks(data) {
                             $(link).text()                              &&
                             /[0-9][0-9][0-9][0-9]/.test($(link).text()) &&
                             !/#/.test($(link).attr('href'))) {
-                        parseSpeech($(link).text(), $(link).attr('href'), lastPres);
+
+                        parseSpeech($(link).text().substring(0, 4), $(link).attr('href'), lastPres);
                         pres.speeches.push($(link).text());
+
                     }
                 }
 
