@@ -70,7 +70,7 @@ function parseLinks(data) {
                             !/#/.test($(link).attr('href'))) {
 
                         parseSpeech($(link).text().substring(0, 4), $(link).attr('href'), lastPres);
-                        pres.speeches.push($(link).text());
+                        pres.speeches.push($(link).text().substring(0, 4));
 
                     }
                 }
